@@ -8,13 +8,32 @@
     android:orientation="vertical"
     >
 
-    <EditText
-        android:id="@+id/searhTextField"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Search"
-        android:inputType="textEmailAddress" />
+        >
+
+        <EditText
+            android:id="@+id/searhTextField"
+            android:layout_width="313dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="9dp"
+            android:layout_toStartOf="@+id/addBtn"
+            android:ems="10"
+            android:hint="Search"
+            android:inputType="textEmailAddress" />
+
+        <Button
+            android:id="@+id/addBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="1dp"
+            android:text="Add" />
+
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/listView"
