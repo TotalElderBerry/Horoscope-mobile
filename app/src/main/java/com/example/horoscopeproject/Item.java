@@ -1,14 +1,16 @@
 package com.example.horoscopeproject;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Item implements Parcelable {
-    private int img;
+    private Bitmap img;
     private String description;
 
     protected Item(Parcel in) {
-        img = in.readInt();
+//        img = in.readInt();
+        img = in.readParcelable(Bitmap.class.getClassLoader());
         description = in.readString();
     }
 
@@ -24,11 +26,11 @@ public class Item implements Parcelable {
         }
     };
 
-    public int getImg() {
+    public Bitmap getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(Bitmap img) {
         this.img = img;
     }
 
@@ -40,7 +42,7 @@ public class Item implements Parcelable {
         this.description = description;
     }
 
-    public Item(int img, String description) {
+    public Item(Bitmap img, String description) {
         this.img = img;
         this.description = description;
     }
@@ -52,7 +54,8 @@ public class Item implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(img);
+//        parcel.writeInt(img);
+        parcel.writeParcelable(img,i);
         parcel.writeString(description);
     }
 }

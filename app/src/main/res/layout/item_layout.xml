@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="-1"
+        android:scaleType="center"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -19,5 +20,5 @@
         android:layout_gravity="center|center_vertical"
         android:layout_weight="1"
         android:text="TextView"
-        android:textSize="24sp" />
+        android:textSize="34sp" />
 </LinearLayout>

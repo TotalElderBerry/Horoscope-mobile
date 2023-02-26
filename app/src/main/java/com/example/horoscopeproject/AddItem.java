@@ -1,6 +1,8 @@
 package com.example.horoscopeproject;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -20,6 +23,7 @@ public class AddItem extends AppCompatActivity{
     Button submitBtn;
     EditText editText;
     ItemInterface inter;
+    Bitmap temp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +31,6 @@ public class AddItem extends AppCompatActivity{
         img = findViewById(R.id.listImage);
         submitBtn = findViewById(R.id.addButton);
         items = getIntent().getParcelableArrayListExtra("list");
-        Log.e("item",items.get(items.size() - 1).getDescription());
         editText = findViewById(R.id.descriptionTxt);
         img.setOnClickListener(
                 new View.OnClickListener() {
@@ -48,7 +51,7 @@ public class AddItem extends AppCompatActivity{
 //                    Log.d("debug",editText.getText().toString());
 //                Log.e("str",editText.getText().toString());
 //                inter.onClick(new Item(R.drawable.aries,editText.getText().toString()));
-                Item i = new Item(R.drawable.aries,editText.getText().toString());
+                Item i = new Item(temp,editText.getText().toString());
                 items.add(i);
 
                 Intent intent = new Intent(AddItem.this, MainActivity.class);
@@ -64,9 +67,18 @@ public class AddItem extends AppCompatActivity{
         if(resultCode == RESULT_OK){
             if(requestCode == PICK_IMAGE){
                 Uri selectedImageUri = data.getData();
-                Log.e("image",selectedImageUri.toString());
-                if(selectedImageUri != null){
-                    img.setImageURI(selectedImageUri);
+                try {
+                    InputStream imageStream = getContentResolver().openInputStream(selectedImageUri);
+                    Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+//                    temp = Bitmap.createScaledBitmap(selectedImage,200,200,false);
+                    temp = selectedImage;
+                    Log.e("image", selectedImageUri.toString());
+                    if (selectedImageUri != null) {
+                        img.setImageBitmap(Bitmap.createScaledBitmap(selectedImage,250,250,false));
+                    }
+                }
+                catch(Exception e){
+
                 }
             }
         }

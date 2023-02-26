@@ -1,6 +1,7 @@
 package com.example.horoscopeproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +64,9 @@ public class ListAdapter extends BaseAdapter implements Filterable {
 
         TextView tView = view.findViewById(R.id.textView);
         ImageView iView = view.findViewById(R.id.imageView);
-        iView.setBackgroundResource(filteredlists.get(i).getImg());
+        iView.setImageBitmap(Bitmap.createScaledBitmap(filteredlists.get(i).getImg(),100,100,false));
         tView.setText(filteredlists.get(i).getDescription());
+//        iView.setImageBitmap(filteredlists.get(i).getImg());
         return view;
     }
 

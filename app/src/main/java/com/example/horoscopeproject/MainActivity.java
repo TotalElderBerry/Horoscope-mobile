@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity implements Serializable, Ite
             }
         }
 
-        list.add(new Item(R.drawable.aquarius,"Aquarius"));
-        list.add(new Item(R.drawable.aries,"Aries"));
-        list.add(new Item(R.drawable.gemini,"Gemini"));
-        list.add(new Item(R.drawable.taurus,"Taurus"));
-        list.add(new Item(R.drawable.leo,"Leo"));
-        list.add(new Item(R.drawable.pisces,"Pisces"));
-        list.add(new Item(R.drawable.libra,"Libra"));
+//        list.add(new Item(R.drawable.aquarius,"Aquarius"));
+//        list.add(new Item(R.drawable.aries,"Aries"));
+//        list.add(new Item(R.drawable.gemini,"Gemini"));
+//        list.add(new Item(R.drawable.taurus,"Taurus"));
+//        list.add(new Item(R.drawable.leo,"Leo"));
+//        list.add(new Item(R.drawable.pisces,"Pisces"));
+//        list.add(new Item(R.drawable.libra,"Libra"));
         listView.setAdapter(adapter);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
