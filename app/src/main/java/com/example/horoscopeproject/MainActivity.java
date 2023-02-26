@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,13 +17,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements Serializable {
+public class MainActivity extends AppCompatActivity implements Serializable, ItemInterface {
 
      ArrayList<Item> list = new ArrayList<Item>();
      ListView listView;
      EditText searchText;
      ListAdapter adapter;
      Button btnAdd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,17 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         listView = findViewById(R.id.listView);
         searchText = findViewById(R.id.searhTextField);
         btnAdd = findViewById(R.id.addBtn);
-        adapter = new ListAdapter(list,this);
+        adapter = new ListAdapter(list,this, this);
+
+        ArrayList<Item> temp = getIntent().getParcelableArrayListExtra("items");
+        if(temp != null){
+            for(Item t : temp){
+                Log.e("item",t.getDescription());
+                adapter.setLists(temp);
+                adapter.notifyDataSetChanged();
+            }
+        }
+
         list.add(new Item(R.drawable.aquarius,"Aquarius"));
         list.add(new Item(R.drawable.aries,"Aries"));
         list.add(new Item(R.drawable.gemini,"Gemini"));
@@ -43,8 +55,11 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddItem.class);
 
+//                list.add(new Item(R.drawable.libra,"test"));
+//                adapter.notifyDataSetChanged();
+                Intent intent = new Intent(MainActivity.this, AddItem.class);
+                intent.putExtra("list", adapter.getLists());
                 startActivity(intent);
             }
         });
@@ -67,4 +82,12 @@ public class MainActivity extends AppCompatActivity implements Serializable {
             }
         });
     }
+
+    @Override
+    public void onClick(Item value) {
+        list.add(value);
+        adapter.notifyDataSetChanged();
+        Log.d("v",value.getDescription());
+    }
+
 }

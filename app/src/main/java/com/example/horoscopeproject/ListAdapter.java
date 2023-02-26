@@ -16,10 +16,21 @@ public class ListAdapter extends BaseAdapter implements Filterable {
     ArrayList<Item> lists,filteredlists;
     Context cont;
 
-    public ListAdapter(ArrayList<Item> lists, Context cont) {
+    public void setLists(ArrayList<Item> lists) {
+        this.filteredlists = lists;
+        this.lists = lists;
+    }
+
+    public ArrayList<Item> getLists() {
+        return lists;
+    }
+
+    private ItemInterface iInt;
+    public ListAdapter(ArrayList<Item> lists, Context cont, ItemInterface inter) {
         this.lists = lists;
         this.filteredlists = lists;
         this.cont = cont;
+        this.iInt = inter;
     }
 
     @Override
@@ -35,6 +46,12 @@ public class ListAdapter extends BaseAdapter implements Filterable {
     @Override
     public long getItemId(int i) {
         return i;
+    }
+
+    public void addItem(Item i){
+        lists.add(i);
+//        iInt.onClick(i);
+        notifyDataSetChanged();
     }
 
     @Override
