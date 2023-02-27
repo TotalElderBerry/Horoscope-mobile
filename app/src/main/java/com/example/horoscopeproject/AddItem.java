@@ -70,8 +70,8 @@ public class AddItem extends AppCompatActivity{
                 try {
                     InputStream imageStream = getContentResolver().openInputStream(selectedImageUri);
                     Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-//                    temp = Bitmap.createScaledBitmap(selectedImage,200,200,false);
-                    temp = selectedImage;
+                    temp = Bitmap.createScaledBitmap(selectedImage,200,200,false);
+//                    temp = selectedImage;
                     Log.e("image", selectedImageUri.toString());
                     if (selectedImageUri != null) {
                         img.setImageBitmap(Bitmap.createScaledBitmap(selectedImage,250,250,false));
